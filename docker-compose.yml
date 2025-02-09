@@ -1,0 +1,52 @@
+name: flowup
+
+services:
+  app:
+    container_name: app
+    depends_on:
+      - api
+    build:
+      context: app
+      dockerfile: Dockerfile
+    volumes:
+      - ./app/src:/var/www/html
+    ports:
+      - "8000:80"
+    command: >
+      sh -c "/usr/local/bin/symfony server:start --no-tls --port=80 --allow-http"
+    
+
+  db:
+    image: postgres:15
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: flowup
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  
+
+  api:
+    image: node:22-alpine
+    container_name: api
+    depends_on:
+      - db
+    restart: always
+    working_dir: /app
+    volumes:
+      - ./api:/app
+    ports:
+      - "3000:3000"
+    command: ["npm", "run", "dev"]  # Lancement automatique d'Express.js
+
+volumes:
+  db_data:
+
+networks:
+  default:
+    name: flowup-network
+    external: true
