@@ -23,12 +23,15 @@ RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
 # Ajouter Symfony CLI au PATH
 ENV PATH="/usr/local/bin:${PATH}"
 
-# Définir le répertoire de travail
-WORKDIR /var/www/html
+# Copier la configuration apache
+COPY vhost.conf /etc/apache2/sites-available/000-default.conf
 
 # Donner les permissions correctes
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html
+
+# Définir le répertoire de travail
+WORKDIR /var/www/html
 
 # Exposer le port 80
 EXPOSE 80
