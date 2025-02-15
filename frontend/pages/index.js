@@ -5,7 +5,7 @@ export default function Home() {
 
   // Récupération des livres depuis l'API
   useEffect(() => {
-    fetch("http://localhost:3000/books")
+    fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/books")
       .then((res) => res.json())
       .then((data) => setBooks(data))
       .catch((err) => console.error("Erreur lors du chargement :", err));
@@ -13,7 +13,7 @@ export default function Home() {
 
   // Fonction pour supprimer un livre
   const handleDelete = async (id) => {
-    const response = await fetch(`http://localhost:3000/books/${id}`, {
+    const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/books/${id}`, {
       method: "DELETE",
     });
 

@@ -1,9 +1,14 @@
 const express = require('express');
+const cors = require('cors');
 const Book = require('./models/book');
 require('dotenv').config();
 
 const app = express();
 app.use(express.json());
+
+app.use(cors({
+    origin: 'http://localhost:3000'
+}))
 
 // Endpoints 
 app.get('/books', async (req, res) => {
