@@ -1,28 +1,31 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { useRouter } from "next/router";
+import AuthContext from "../context/AuthContext";
 
 export default function Home() {
+  const { token } = useContext(AuthContext); // Vérifier si l'utilisateur est connecté
+  const router = useRouter();
   const [books, setBooks] = useState([]);
 
-  // Récupération des livres depuis l'API
+  // Redirige vers /login si l'utilisateur n'est pas connecté
   useEffect(() => {
-    fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/books")
-      .then((res) => res.json())
-      .then((data) => setBooks(data))
-      .catch((err) => console.error("Erreur lors du chargement :", err));
-  }, []);
-
-  // Fonction pour supprimer un livre
-  const handleDelete = async (id) => {
-    const response = await fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/books/${id}`, {
-      method: "DELETE",
-    });
-
-    if (response.ok) {
-      setBooks(books.filter((book) => book.id !== id)); // Met à jour l'affichage
-    } else {
-      console.error("Erreur lors de la suppression");
+    if (!token) {
+      router.push("/login");
     }
-  };
+  }, [token]);
+
+  useEffect(() => {
+    if (token) {
+      fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/books", {
+        headers: { Authorization: `Bearer ${token}` }, // Envoi du token JWT
+      })
+        .then((res) => res.json())
+        .then((data) => setBooks(data))
+        .catch((err) => console.error("Erreur lors du chargement :", err));
+    }
+  }, [token]);
+
+  if (!token) return <p>Redirection en cours...</p>; // Affiche un message pendant la redirection
 
   return (
     <div>
@@ -30,6 +33,14 @@ export default function Home() {
       <a href="/add" style={{ display: "block", marginBottom: "20px" }}>
         Ajouter un Livre
       </a>
+      <button
+        onClick={() => {
+          localStorage.removeItem("token"); // Supprime le token
+          window.location.reload(); // Recharge la page pour forcer la déconnexion
+        }}
+      >
+        Se Déconnecter
+      </button>
       <ul>
         {books.length === 0 ? (
           <p>Aucun livre disponible.</p>
@@ -39,7 +50,20 @@ export default function Home() {
               <a href={`/book/${book.id}`} style={{ marginRight: "10px" }}>
                 {book.title} - {book.author} ({book.year})
               </a>
-              <button onClick={() => handleDelete(book.id)}>Supprimer</button>
+              <button
+                onClick={async () => {
+                  await fetch(
+                    process.env.NEXT_PUBLIC_API_BASE_URL + `/books/${book.id}`,
+                    {
+                      method: "DELETE",
+                      headers: { Authorization: `Bearer ${token}` }, // Envoi du token JWT
+                    }
+                  );
+                  setBooks(books.filter((b) => b.id !== book.id));
+                }}
+              >
+                Supprimer
+              </button>
             </li>
           ))
         )}
