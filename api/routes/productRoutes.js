@@ -21,7 +21,7 @@ const ProductModel = require("../models/productModel");
  */
 router.get("/", async (req, res) => {
   try {
-    const result = await ProductModel.getAllProducts();
+    const result = await ProductModel.getAll();
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -55,7 +55,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const id = req.params["id"];
-    const result = await ProductModel.getProductById(id);
+    const result = await ProductModel.getById(id);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -89,7 +89,7 @@ router.get("/:id", async (req, res) => {
  */
 router.post("/", async (req, res) => {
   try {
-    const result = await ProductModel.createProduct(req.body);
+    const result = await ProductModel.create(req.body);
     res.status(201).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -129,7 +129,7 @@ router.post("/", async (req, res) => {
  */
 router.put("/:id", async (req, res) => {
   try {
-    const result = await ProductModel.updateProduct(req.params.id, req.body);
+    const result = await ProductModel.update(req.params.id, req.body);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -164,7 +164,7 @@ router.put("/:id", async (req, res) => {
  */
 router.delete("/:id", async (req, res) => {
   try {
-    await ProductModel.deleteProduct(req.params.id);
+    await ProductModel.delete(req.params.id);
     res.status(204).send();
   } catch (error) {
     res.status(500).json({ error: error.message });
