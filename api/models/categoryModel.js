@@ -11,12 +11,12 @@ const pool = new Pool ({
 });
 
 class CategoryModel {
-    static async getAllCategories() {
+    static async getAll() {
         const result = await pool.query('SELECT * FROM category');
         return result.rows;
     }
 
-    static async getCategoryById(id) {
+    static async getById(id) {
         const result = await pool.query(
             'SELECT * FROM category WHERE id_category = $1', 
             [id]

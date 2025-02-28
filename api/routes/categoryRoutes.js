@@ -21,8 +21,8 @@ const CategoryModel = require("../models/categoryModel");
  */
 router.get("/", async (req, res) => {
   try {
-      const categories = await CategoryModel.getAllCategories();
-      res.status(200).json(categories);
+      const result = await CategoryModel.getAll();
+      res.status(200).json(result);
   } catch (error) {
       res.status(500).json({ error: error.message })
   }
@@ -55,9 +55,9 @@ router.get("/", async (req, res) => {
  */
 router.get("/:id", async (req, res) => {
   try {
-    const id = req.params["id"];
-      const category = await CategoryModel.getCategoryById(id);
-      res.status(200).json(category);
+      const id = req.params["id"];
+      const result = await CategoryModel.getById(id);
+      res.status(200).json(result);
   } catch (error) {
       res.status(500).json({ error: error.message })
   }
