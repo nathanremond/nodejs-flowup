@@ -58,6 +58,9 @@ app.use("/product", productRoutes);
 const userRoutes = require("./routes/userRoutes");
 app.use("/", userRoutes);
 
+const bestSellsRoutes = require("./routes/bestSellsRoutes");
+app.use("/bestSells", bestSellsRoutes);
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
