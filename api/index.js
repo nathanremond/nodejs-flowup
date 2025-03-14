@@ -67,6 +67,9 @@ app.use("/news", newsRoutes);
 const requestRoutes = require("./routes/requestRoutes");
 app.use("/request", requestRoutes);
 
+const orderRoutes = require("./routes/orderRoutes");
+app.use("/order", orderRoutes);
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
