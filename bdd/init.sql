@@ -85,6 +85,7 @@ CREATE TABLE product(
     serial_number varchar(255) NOT NULL,
     model varchar(255) NOT NULL,
     game_types varchar(255) NOT NULL,
+    release_date timestamp not null,
     id_brand int,
     FOREIGN KEY (id_brand) REFERENCES brand(id_brand),
     id_category int,
@@ -142,8 +143,8 @@ INSERT INTO brand ( name, description ) VALUES ( 'ASUS', 'ASUS est une marque re
 
 INSERT INTO category ( name ) VALUES ( 'PC sur mesure' );
 
-INSERT INTO product ( name, picture_url, price, description, graphic_card, processor, ram, storage, guarantee, serial_number, model, game_types, id_brand, id_category )
-	VALUES ( 'PC Inferno TUF Gaming GEFORCE RTX® 4070 SUPER Powered by ASUS', 'https://www.flowup.shop/web/image/product.product/4027/image_1024/PC%20Inferno%20TUF%20Gaming%20GEFORCE%20RTX%C2%AE%204070%20SUPER%20Powered%20by%20ASUS?unique=9595a39', '1763.58', 'Le PC Inferno TUF Gaming GEFORCE RTX® 4070 SUPER Powered by ASUS est une machine de jeu performante et fiable, conçue pour les gamers exigeants.', 'ASUS RTX 4070 Super', 'AMD Ryzen 7 8700F', 'Kingston 2x16Go DDR5 6000Mhz', 5, 'Garanti 2 ans et +', '1', 'PC gamer', 'Tout', 1, 1 );
+INSERT INTO product ( name, picture_url, price, description, graphic_card, processor, ram, storage, guarantee, serial_number, model, game_types, release_date, id_brand, id_category )
+	VALUES ( 'PC Inferno TUF Gaming GEFORCE RTX® 4070 SUPER Powered by ASUS', 'https://www.flowup.shop/web/image/product.product/4027/image_1024/PC%20Inferno%20TUF%20Gaming%20GEFORCE%20RTX%C2%AE%204070%20SUPER%20Powered%20by%20ASUS?unique=9595a39', '1763.58', 'Le PC Inferno TUF Gaming GEFORCE RTX® 4070 SUPER Powered by ASUS est une machine de jeu performante et fiable, conçue pour les gamers exigeants.', 'ASUS RTX 4070 Super', 'AMD Ryzen 7 8700F', 'Kingston 2x16Go DDR5 6000Mhz', 5, 'Garanti 2 ans et +', '1', 'PC gamer', 'Tout','2025-03-10 14:30:00', 1, 1 );
 
 INSERT INTO photos ( name, id_product ) VALUES ( 'PC Inferno TUF Gaming GEFORCE RTX® 4070 SUPER Powered by ASUS', 1 );
 
