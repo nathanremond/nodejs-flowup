@@ -24,9 +24,9 @@ class ProductModel {
         return result.rows[0]
     }
 
-    static async create({ name, picture_url, price, description, graphic_card, processor, ram, storage, guarantee, serial_number, model, game_types, id_brand, id_category }) {
+    static async create({ name, picture_url, price, description, graphic_card, processor, ram, storage, guarantee, serial_number, model, game_types, release_date, id_brand, id_category }) {
         const result = await pool.query(
-          "INSERT INTO product (name, picture_url, price, description, graphic_card, processor, ram, storage, guarantee, serial_number, model, game_types, id_brand, id_category) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *",
+          "INSERT INTO product (name, picture_url, price, description, graphic_card, processor, ram, storage, guarantee, serial_number, model, game_types, release_date, id_brand, id_category) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *",
           [
             name,
             picture_url,
@@ -40,6 +40,7 @@ class ProductModel {
             serial_number,
             model,
             game_types,
+            release_date,
             id_brand,
             id_category,
           ]
@@ -47,9 +48,9 @@ class ProductModel {
         return result.rows[0]
     }
 
-    static async update(id, { name, picture_url, price, description, graphic_card, processor, ram, storage, guarantee, serial_number, model, game_types, id_brand, id_category }) {
+    static async update(id, { name, picture_url, price, description, graphic_card, processor, ram, storage, guarantee, serial_number, model, game_types, release_date, id_brand, id_category }) {
         const result = await pool.query(
-          "UPDATE product SET name = $1, picture_url = $2, price = $3, description = $4, graphic_card = $5, processor = $6, ram = $7, storage = $8, guarantee = $9, serial_number = $10, model = $11, game_types = $12, id_brand = $13, id_category = $14  WHERE id_product = $15 RETURNING * ",
+          "UPDATE product SET name = $1, picture_url = $2, price = $3, description = $4, graphic_card = $5, processor = $6, ram = $7, storage = $8, guarantee = $9, serial_number = $10, model = $11, game_types = $12, release_date = $13, id_brand = $14, id_category = $15  WHERE id_product = $16 RETURNING * ",
           [
             name,
             picture_url,
@@ -63,9 +64,10 @@ class ProductModel {
             serial_number,
             model,
             game_types,
+            release_date,
             id_brand,
             id_category,
-            id
+            id,
           ]
         );
         return result.rows[0];
