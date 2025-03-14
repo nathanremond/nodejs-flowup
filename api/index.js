@@ -70,6 +70,9 @@ app.use("/request", requestRoutes);
 const orderRoutes = require("./routes/orderRoutes");
 app.use("/order", orderRoutes);
 
+const brandRoutes = require("./routes/brandRoutes");
+app.use("/brand", brandRoutes);
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
