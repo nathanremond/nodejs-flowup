@@ -20,7 +20,7 @@ class UserModel {
   }
 
 
-  static async create({ firstname, lastname, email, password, id_role }) {
+  static async create( firstname, lastname, email, password, id_role ) {
     const result = await pool.query(
       "INSERT INTO users (firstname, lastname, email, password, id_role) VALUES ($1, $2, $3, $4, $5) RETURNING *",
       [firstname, lastname, email, password, id_role]
