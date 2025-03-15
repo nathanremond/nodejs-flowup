@@ -19,7 +19,7 @@ const ProductModel = require("../models/productModel");
  *             error:
  *              message: "Bad Request"
  */
-router.get("/", async (req, res) => {
+router.get("/product", async (req, res) => {
   try {
     const result = await ProductModel.getAll();
     res.status(200).json(result);
@@ -52,10 +52,52 @@ router.get("/", async (req, res) => {
  *             error:
  *              message: "Bad Request"
  */
-router.get("/:id", async (req, res) => {
+router.get("/product/:id", async (req, res) => {
   try {
     const id = req.params["id"];
     const result = await ProductModel.getById(id);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+/**
+ * @swagger
+ * /brand/{id_brand}/product:
+ *   get:
+ *     summary: Get a product by brand ID and category ID
+ *     tags: [Products]
+ *     parameters:
+ *       - name: id_brand
+ *         in: path
+ *         required: true
+ *         description: The ID of the brand
+ *         schema:
+ *           type: integer
+ *       - name: category
+ *         in: query
+ *         required: true
+ *         description: The ID of the category
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *          application/json:
+ *            example:
+ *             error:
+ *              message: "Bad Request"
+ */
+router.get("/brand/:id_brand/product", async (req, res) => {
+  try {
+    const id_brand = req.params.id_brand;
+    const id_category = req.query.category;
+    const result = await ProductModel.getByBrandAndCategory(id_brand, id_category);
     res.status(200).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -87,7 +129,7 @@ router.get("/:id", async (req, res) => {
  *             error:
  *              message: "Bad Request"
  */
-router.post("/", async (req, res) => {
+router.post("/product", async (req, res) => {
   try {
     const result = await ProductModel.create(req.body);
     res.status(201).json(result);
@@ -127,7 +169,7 @@ router.post("/", async (req, res) => {
  *             error:
  *              message: "Bad Request"
  */
-router.put("/:id", async (req, res) => {
+router.put("/product/:id", async (req, res) => {
   try {
     const result = await ProductModel.update(req.params.id, req.body);
     res.status(200).json(result);
@@ -162,7 +204,7 @@ router.put("/:id", async (req, res) => {
  *             error:
  *              message: "Bad Request"
  */
-router.delete("/:id", async (req, res) => {
+router.delete("/product/:id", async (req, res) => {
   try {
     await ProductModel.delete(req.params.id);
     res.status(204).send();
