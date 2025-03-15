@@ -78,15 +78,16 @@ router.post("/login", async (req, res) => {
  */
 router.post("/register", async (req, res) => {
   try {
-    const { firstname, lastname, email, password, id_role } = req.body;
+    const { firstname, lastname, email, password} = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await UserModel.create({
+    const id_role = 2;
+    const user = await UserModel.create(
       firstname,
       lastname,
       email,
       hashedPassword,
       id_role,
-    });
+    );
     res.status(201).json({ message: "Utilisateur crée", user });
   } catch (error) {
     res.status(500).json({ error: error.message });
