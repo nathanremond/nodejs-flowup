@@ -53,7 +53,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 app.use("/category", categoryRoutes);
 
 const productRoutes = require("./routes/productRoutes");
-app.use("/product", productRoutes);
+app.use("/", productRoutes);
 
 const userRoutes = require("./routes/userRoutes");
 app.use("/", userRoutes);
