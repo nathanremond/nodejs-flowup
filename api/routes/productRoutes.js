@@ -62,6 +62,42 @@ router.get("/product/:id", async (req, res) => {
   }
 });
 
+/**
+ * @swagger
+ * /category/{id_category}/product:
+ *   get:
+ *     summary: Get a product by category ID
+ *     tags: [Products]
+ *     parameters:
+ *       - name: category
+ *         in: query
+ *         required: true
+ *         description: The ID of the category
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Successful response
+ *       400:
+ *         description: Bad Request
+ *         content:
+ *          application/json:
+ *            example:
+ *             error:
+ *              message: "Bad Request"
+ */
+router.get("/category/:id_category/product", async (req, res) => {
+  try {
+    const id_category = req.params.id_category;
+    const result = await ProductModel.getByCategory(
+      id_category
+    );
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 /**
  * @swagger

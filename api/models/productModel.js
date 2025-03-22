@@ -24,6 +24,14 @@ class ProductModel {
     return result.rows[0];
   }
 
+  static async getByCategory(id_category) {
+    const result = await pool.query(
+      "SELECT * FROM product WHERE id_category = $1",
+      [id_category]
+    );
+    return result.rows;
+  }
+
   static async getByBrandAndCategory(id_brand, id_category) {
     const result = await pool.query(
       "SELECT * FROM product WHERE id_brand = $1 and id_category = $2",
