@@ -69,8 +69,8 @@ router.get("/product/:id", async (req, res) => {
  *     summary: Get a product by category ID
  *     tags: [Products]
  *     parameters:
- *       - name: category
- *         in: query
+ *       - name: id_category
+ *         in: path
  *         required: true
  *         description: The ID of the category
  *         schema:
