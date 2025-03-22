@@ -76,8 +76,8 @@ app.use("/brand", brandRoutes);
 const orderProductRoutes = require("./routes/orderProductRoutes");
 app.use("/orderProduct", orderProductRoutes);
 
-const gameRoutes = require("./routes/gameRoutes");
-app.use("/game", gameRoutes);
+const performanceRoutes = require("./routes/performanceRoutes");
+app.use("/", performanceRoutes);
 
 const PORT = process.env.PORT || 3000;
 
