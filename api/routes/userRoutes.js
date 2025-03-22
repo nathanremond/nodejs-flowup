@@ -40,8 +40,12 @@ router.post("/login", async (req, res) => {
     if (!user || !isPasswordValid) {
       return res.status(401).json({ error: "Identifiants invalides" });
     }
-
-    const token = jwt.sign({ id: user.id, email: user.email }, SECRET_KEY, {
+    const payload = {
+      id_user: user.id_user,
+      email: user.email,
+      id_role: user.id_role,
+    };
+    const token = jwt.sign(payload, SECRET_KEY, {
       expiresIn: "2h",
     });
 

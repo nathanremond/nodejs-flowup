@@ -33,6 +33,7 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 // Middleware de protection des routes
 const authenticate = (req, res, next) => {
+    if(req.path === "/login" || req.path === "/register") return next();
     const token = req.headers.authorization?.split(" ")[1]; // Récupérer le token
     if (!token) return res.status(401).json({ error: "Accès non autorisé" });
   
@@ -45,7 +46,7 @@ const authenticate = (req, res, next) => {
     }
 }
 
-// app.use(authenticate);
+app.use(authenticate);
 
 // Endpoints 
 
@@ -72,9 +73,6 @@ app.use("/order", orderRoutes);
 
 const brandRoutes = require("./routes/brandRoutes");
 app.use("/brand", brandRoutes);
-
-const orderProductRoutes = require("./routes/orderProductRoutes");
-app.use("/orderProduct", orderProductRoutes);
 
 const performanceRoutes = require("./routes/performanceRoutes");
 app.use("/", performanceRoutes);

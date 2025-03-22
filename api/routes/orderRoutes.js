@@ -14,7 +14,19 @@ const OrderModel = require("../models/orderModel");
  *         required: true
  *         description: Informations of the order
  *         schema:
- *           type: string
+ *           type: object
+ *           properties:
+ *            total_amount:
+ *             type: number
+ *            ordered_products:
+ *              type: array
+ *              items:
+ *                type: object
+ *                properties:
+ *                  id_product:
+ *                    type: number
+ *                  quantity:
+ *                    type: number
  *     responses:
  *       200:
  *         description: Successful response
@@ -28,7 +40,7 @@ const OrderModel = require("../models/orderModel");
  */
 router.post("/", async (req, res) => {
   try {
-    const result = await OrderModel.create(req.body);
+    const result = await OrderModel.create(req.body, req.user.id_user);
     res.status(201).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });
