@@ -19,7 +19,7 @@ const BrandModel = require("../models/brandModel");
  *             error:
  *              message: "Bad Request"
  */
-router.get("/", async (req, res) => {
+router.get("/brand", async (req, res) => {
   try {
     const result = await BrandModel.getAll();
     res.status(200).json(result);
@@ -52,7 +52,7 @@ router.get("/", async (req, res) => {
  *             error:
  *              message: "Bad Request"
  */
-router.get("/:id", async (req, res) => {
+router.get("/brand/:id", async (req, res) => {
   try {
     const id = req.params["id"];
     const result = await BrandModel.getById(id);

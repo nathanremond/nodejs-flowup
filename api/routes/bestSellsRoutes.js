@@ -19,7 +19,7 @@ const bestSellsModel = require("../models/sells/bestSellsModel");
  *             error:
  *              message: "Bad Request"
  */
-router.get("/", async (req, res) => {
+router.get("/bestSells", async (req, res) => {
   try {
     const result = await bestSellsModel.getAll();
     res.status(200).json(result);

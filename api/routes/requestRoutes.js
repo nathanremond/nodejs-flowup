@@ -26,7 +26,7 @@ const RequestModel = require("../models/requestModel");
  *             error:
  *              message: "Bad Request"
  */
-router.post("/", async (req, res) => {
+router.post("/request", async (req, res) => {
   try {
     const result = await RequestModel.create(req.body);
     res.status(201).json(result);

@@ -38,7 +38,7 @@ const OrderModel = require("../models/orderModel");
  *             error:
  *              message: "Bad Request"
  */
-router.post("/", async (req, res) => {
+router.post("/order", async (req, res) => {
   try {
     const result = await OrderModel.create(req.body, req.user.id_user);
     res.status(201).json(result);
