@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 export default function BookDetail() {
   const router = useRouter();
   const { id } = router.query;
-  const [book, setBook] = useState(null);
+  const [brand, setBrand] = useState(null);
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:3000/books/${id}`)
+      fetch(`http://localhost:3000/brand/${id}`)
         .then((res) => res.json())
-        .then((data) => setBook(data))
+        .then((data) => setBrand(data))
         .catch((err) => console.error("Erreur :", err));
     }
   }, [id]);
@@ -19,7 +19,7 @@ export default function BookDetail() {
 
   return (
     <div>
-      <h1>{book.title}</h1>
+      <h1>{brand.title}</h1>
       <p>Auteur : {book.author}</p>
       <p>Année : {book.year}</p>
     </div>
