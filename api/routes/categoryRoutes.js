@@ -19,12 +19,12 @@ const CategoryModel = require("../models/categoryModel");
  *             error:
  *              message: "Bad Request"
  */
-router.get("/", async (req, res) => {
+router.get("/category", async (req, res) => {
   try {
-      const result = await CategoryModel.getAll();
-      res.status(200).json(result);
+    const result = await CategoryModel.getAll();
+    res.status(200).json(result);
   } catch (error) {
-      res.status(500).json({ error: error.message })
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -53,13 +53,13 @@ router.get("/", async (req, res) => {
  *             error:
  *              message: "Bad Request"
  */
-router.get("/:id", async (req, res) => {
+router.get("/category/:id", async (req, res) => {
   try {
-      const id = req.params["id"];
-      const result = await CategoryModel.getById(id);
-      res.status(200).json(result);
+    const id = req.params["id"];
+    const result = await CategoryModel.getById(id);
+    res.status(200).json(result);
   } catch (error) {
-      res.status(500).json({ error: error.message })
+    res.status(500).json({ error: error.message });
   }
 });
 

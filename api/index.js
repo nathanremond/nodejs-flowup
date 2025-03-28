@@ -51,7 +51,7 @@ const authenticate = (req, res, next) => {
 // Endpoints 
 
 const categoryRoutes = require('./routes/categoryRoutes');
-app.use("/category", categoryRoutes);
+app.use("/", categoryRoutes);
 
 const productRoutes = require("./routes/productRoutes");
 app.use("/", productRoutes);
@@ -60,19 +60,19 @@ const userRoutes = require("./routes/userRoutes");
 app.use("/", userRoutes);
 
 const bestSellsRoutes = require("./routes/bestSellsRoutes");
-app.use("/bestSells", bestSellsRoutes);
+app.use("/", bestSellsRoutes);
 
 const newsRoutes = require("./routes/newsRoutes");
-app.use("/news", newsRoutes);
+app.use("/", newsRoutes);
 
 const requestRoutes = require("./routes/requestRoutes");
-app.use("/request", requestRoutes);
+app.use("/", requestRoutes);
 
 const orderRoutes = require("./routes/orderRoutes");
-app.use("/order", orderRoutes);
+app.use("/", orderRoutes);
 
 const brandRoutes = require("./routes/brandRoutes");
-app.use("/brand", brandRoutes);
+app.use("/", brandRoutes);
 
 const performanceRoutes = require("./routes/performanceRoutes");
 app.use("/", performanceRoutes);
