@@ -46,7 +46,7 @@ const authenticate = (req, res, next) => {
     }
 }
 
-//app.use(authenticate);
+// app.use(authenticate);
 
 // Endpoints 
 
