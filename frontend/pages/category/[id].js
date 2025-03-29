@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export default function BookDetail() {
+export default function categoryDetail() {
   const router = useRouter();
   const { id } = router.query;
   const [category, setCategory] = useState(null);
@@ -64,11 +64,13 @@ export default function BookDetail() {
                 <ul>
                   {productByCategory.map((product) => (
                     <li key={product.id_product}>
-                      <img src={""} alt={product.name} />
-                      <h3>{product.name}</h3>
-                      <p>{product.description}</p>
-                      <p>{product.price}</p>
-                      <button>Ajouter au panier</button>
+                      <a href={`/product/${product.id_product}`} className="product">
+                        <img src={""} alt={product.name} />
+                        <h3>{product.name}</h3>
+                        <p>{product.description}</p>
+                        <p>{product.price}</p>
+                        <button>Ajouter au panier</button>
+                      </a>
                     </li>
                   ))}
                 </ul>
