@@ -6,6 +6,7 @@ export default function Collab() {
     const { token } = useContext(AuthContext);
     const router = useRouter();
     const [brand, setBrand] = useState(null);
+    const [category, setCategory] = useState(null);
 
     useEffect(() => {
         fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/brand`)
@@ -14,6 +15,14 @@ export default function Collab() {
           .catch((err) => console.error("Erreur :", err));
       }
       , []);
+
+    useEffect(() => {
+    fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/category`)
+        .then((res) => res.json())
+        .then((data) => setCategory(data))
+        .catch((err) => console.error("Erreur :", err));
+      }
+      , []);  
     
     return (
         <div>
@@ -24,7 +33,13 @@ export default function Collab() {
                 </div>
                 <nav class="menu">
                     <a href="/">Accueil</a>
-                    <a href="/category">PC</a>
+                    {category && category.map((category) => (
+                        <a href={`/category/${category.id}`} className="category">
+                            <div key={category.id} >
+                                {category.name}
+                            </div>
+                        </a>
+                    ))}
                     <a href="/brand">Collaborations</a>
                     <a href="/request">PC personnalisés</a>   
                 </nav>
@@ -32,8 +47,8 @@ export default function Collab() {
             <main>
                 <h1>Marques</h1>
                 {brand && brand.map((brand) => (
-                    <a href="/brand/[brand.id]" className="brand">
-                        <div key={brand.id} >
+                    <a href={`/brand/${brand.id}`} className="brand">
+                        <div key={brand.id_brand} >
                             <h2>{brand.name}</h2>
                             <p>{brand.description}</p>
                         </div>

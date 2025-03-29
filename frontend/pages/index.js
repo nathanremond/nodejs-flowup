@@ -7,6 +7,8 @@ export default function Home() {
   const router = useRouter();    
   const [news, setNews] = useState(null);
   const [best_sells, setBest_sells] = useState(null);
+  const [category, setCategory] = useState(null);
+  const [product, setProduct] = useState(null);
   
   useEffect(() => {
     fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/bestSells`)
@@ -22,6 +24,22 @@ export default function Home() {
       .then((data) => setNews(data))
       .catch((err) => console.error("Erreur :", err));
   }, []);
+
+  useEffect(() => {
+    fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/product`)
+      .then((res) => res.json())
+      .then((data) => setProduct(data))
+      .catch((err) => console.error("Erreur :", err));
+  }
+  , []);
+
+  useEffect(() => {
+    fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/category`)
+      .then((res) => res.json())
+      .then((data) => setCategory(data))
+      .catch((err) => console.error("Erreur :", err));
+  }
+  , []);
   
  
   
@@ -58,9 +76,13 @@ export default function Home() {
         </div>
         <nav class="menu">
             <a href="/">Accueil</a>
-            <a href="/category">PC gamer</a>
-            <a href="/category">PC portables</a>
-            <a href="/category">Périphériques </a>
+            {category && category.map((category) => (
+                <a href={`/category/${category.id_category}`} className="category">
+                    <div key={category.id_category} >
+                        {category.name}
+                    </div>
+                </a>
+            ))}
             <a href="/brand">Collaborations</a>
             <a href="/request">PC personnalisés</a>   
         </nav>
@@ -75,9 +97,9 @@ export default function Home() {
           <p>Aucune vente.</p>
         ) : (
           best_sells.map((product) => (
-          <div key={product.id}>
+          <div key={product.id_product}>
             <h3>
-              <a href={`/bestSells`} style={{ marginRight: "10px" }}>
+              <a href={`/product/${product.id_product}`} style={{ marginRight: "10px" }}>
                 {product.name}
               </a>
             </h3>
@@ -99,9 +121,9 @@ export default function Home() {
           <p>Aucune nouveauté.</p>
         ) : (
           news.map((product) => (
-          <div key={product.id}>
+          <div key={product.id_product}>
             <h3>
-              <a href={`/news`} style={{ marginRight: "10px" }}>
+              <a href={`/product/${product.id_product}`} style={{ marginRight: "10px" }}>
                 {product.name}
               </a>
             </h3>
