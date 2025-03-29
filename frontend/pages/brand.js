@@ -55,6 +55,5 @@ export default function Collab() {
                     </a>
                 ))}
             </main>
-        </div>
-    )
+        </div>   
 } 

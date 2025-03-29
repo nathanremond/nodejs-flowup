@@ -25,6 +25,7 @@ export default function Register() {
   return (
     <form onSubmit={handleRegister}>
       <h1>Créer un compte</h1>
+      <a href="/login">Se connecter à un compte</a>
       <input
         type="text"
         placeholder="Prénom"

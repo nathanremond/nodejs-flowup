@@ -21,8 +21,8 @@ export default function Login() {
 
     if (response.ok) {
       const data = await response.json();
-      login(data.token);
-      router.push("/");
+      login(data.token, data.email, data.id_role);
+      router.push("/profile");
     }
   };
 

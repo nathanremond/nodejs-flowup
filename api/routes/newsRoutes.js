@@ -19,7 +19,7 @@ const newsModel = require("../models/sells/newsModel");
  *             error:
  *              message: "Bad Request"
  */
-router.get("/", async (req, res) => {
+router.get("/news", async (req, res) => {
   try {
     const result = await newsModel.getAll();
     res.status(200).json(result);
