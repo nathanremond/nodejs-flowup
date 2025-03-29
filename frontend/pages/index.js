@@ -7,6 +7,8 @@ export default function Home() {
   const router = useRouter();    
   const [news, setNews] = useState(null);
   const [best_sells, setBest_sells] = useState(null);
+  const [category, setCategory] = useState(null);
+  const [product, setProduct] = useState(null);
   
   useEffect(() => {
     fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/bestSells`)
@@ -22,6 +24,22 @@ export default function Home() {
       .then((data) => setNews(data))
       .catch((err) => console.error("Erreur :", err));
   }, []);
+
+  useEffect(() => {
+    fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/product`)
+      .then((res) => res.json())
+      .then((data) => setProduct(data))
+      .catch((err) => console.error("Erreur :", err));
+  }
+  , []);
+
+  useEffect(() => {
+    fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/category`)
+      .then((res) => res.json())
+      .then((data) => setCategory(data))
+      .catch((err) => console.error("Erreur :", err));
+  }
+  , []);
   
  
   
@@ -63,16 +81,22 @@ export default function Home() {
           </a>
         </div>
         <nav class="menu">
-          <a href="/">Accueil</a>
-          <a href="/category">PC gamer</a>
-          <a href="/category">PC portables</a>
-          <a href="/category">Périphériques </a>
-          <a href="/brand">Collaborations</a>
-          <a href="/request">PC personnalisés</a>
+            <a href="/">Accueil</a>
+            {category && category.map((category) => (
+                <a href={`/category/${category.id_category}`} className="category">
+                    <div key={category.id_category} >
+                        {category.name}
+                    </div>
+                </a>
+            ))}
+            <a href="/brand">Collaborations</a>
+            <a href="/request">PC personnalisés</a>   
+
         </nav>
       </header>
       <div>
         <h2>Les meilleures ventes</h2>
+
 
         <div>
           {!best_sells ? (
