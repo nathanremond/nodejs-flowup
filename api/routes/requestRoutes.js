@@ -6,7 +6,7 @@ const RequestModel = require("../models/requestModel");
  * @swagger
  * /user/{id_user}/request:
  *   get:
- *     summary: Get a request by user ID
+ *     summary: Get requests by user ID
  *     tags: [Requests]
  *     parameters:
  *       - name: id_user
