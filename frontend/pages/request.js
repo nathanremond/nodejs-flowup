@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../context/AuthContext";
 
@@ -16,13 +16,15 @@ export default function Request() {
   const [budget, setBudget] = useState("");
   const [message, setMessage] = useState("");
 
+  //Redirige vers /login si l'utilisateur n'est pas connecté
+  useEffect(() => {
+    if (!isLoading && !token) {
+      router.push("/login");
+    }
+  }, [isLoading, token]);
+
   const handleRequest = async (e) => {
     e.preventDefault();
-    if (!token) {
-      router.push("/login");
-      return;
-    }
-    if (isLoading) return;
     const response = await fetch(
       process.env.NEXT_PUBLIC_API_BASE_URL + "/request",
       {
@@ -64,12 +66,6 @@ export default function Request() {
         placeholder="Phone"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
       />
       <input
         type="text"
