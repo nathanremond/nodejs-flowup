@@ -11,7 +11,15 @@ const pool = new Pool ({
 });
 
 class OrderModel {
-  static async create({total_amount, ordered_products}, id_user) {
+  static async getByUser(id_user) {
+    const result = await pool.query(
+      "SELECT * FROM orders WHERE id_user = $1",
+      [id_user]
+    );
+    return result.rows;
+  }
+
+  static async create({ total_amount, ordered_products }, id_user) {
     const client = await pool.connect();
     try {
       await client.query("BEGIN");
