@@ -4,7 +4,7 @@ import AuthContext from "../context/AuthContext";
 import formatDate from "../utils/functions";
 
 export default function profile() {
-  const { token, id_user, email, isLoading } = useContext(AuthContext);
+  const { token, id_user, email, isLoading, logout } = useContext(AuthContext);
   const router = useRouter();
   const [requestsByUser, setRequestsByUser] = useState(null);
   const [ordersByUser, setOrdersByUser] = useState(null);
@@ -33,6 +33,12 @@ export default function profile() {
         .catch((err) => console.error("Erreur :", err));
     }
   }, [id_user]);
+
+  const handleLogout = async (e) => {
+    e.preventDefault();
+    logout();
+    router.push("/");
+  };
 
   if (isLoading) return <p>Chargement...</p>;
   if (!token) return <p>Redirection en cours...</p>; // Affiche un message pendant la redirection
@@ -78,6 +84,10 @@ export default function profile() {
         ) : (
           <p>Aucune commande trouvée.</p>
         )}
+      </div>
+
+      <div>
+        <button onClick={handleLogout}>Se déconnecter</button>
       </div>
     </div>
   );
