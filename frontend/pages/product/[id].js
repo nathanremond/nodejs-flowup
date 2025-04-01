@@ -7,6 +7,13 @@ export default function ProductDetail() {
   const [productByID, setProductByID] = useState(null);
   const [category, setCategory] = useState(null);
 
+  const handleAddToCart = () => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const updatedCart = [...storedCart, productByID];
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    alert(`${productByID.name} a été ajouté au panier !`);
+  };
+
   useEffect(() => {
     if (id) {
       fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/product/${id}`)
@@ -31,7 +38,7 @@ export default function ProductDetail() {
         <header>
             <div>
                 <a href="/login" className=""> <img src="icone_de_connexion.png" alt="Icône de connexion"/> </a>
-                <a href="/" className="text-3xl font-bold underline"> <img src="icone_de_panier.png" alt="Icône de connexion"/> </a>
+                <a href="/order" className="text-3xl font-bold underline"> <img src="icone_de_panier.png" alt="Icône de panier"/> </a>
             </div>
             <nav class="menu">
                 <a href="/">Accueil</a>
@@ -51,7 +58,7 @@ export default function ProductDetail() {
             <h2>{productByID.name}</h2>
             <p>{productByID.description}</p>
             <p>{productByID.price} €</p>
-            <button>Ajouter au panier</button>
+            <button onClick={handleAddToCart}>Ajouter au panier</button>
             <p>{productByID.graphic_card}</p>
             <p>{productByID.processor}</p>
             <p>{productByID.ram}</p>
