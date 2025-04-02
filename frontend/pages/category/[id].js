@@ -7,6 +7,8 @@ export default function categoryDetail() {
   const [category, setCategory] = useState(null);
   const [categoryByID, setCategoryByID] = useState(null);
   const [productByCategory, setProductByCategory] = useState(null);
+  const [productByID, setProductByID] = useState(null);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     if (id) {
@@ -33,6 +35,40 @@ export default function categoryDetail() {
       .catch((err) => console.error("Erreur :", err));
   }
   , []);
+
+  useEffect(() => {
+    if (id) {
+      fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/product/${id}`)
+        .then((res) => res.json())
+        .then((data) => setProductByID(data))
+        .catch((err) => console.error("Erreur :", err));
+    }
+  }, [id]);
+
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCart(storedCart);
+  }, []);
+
+  const handleAddToCart = () => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existingProduct = storedCart.find((item) => item.id_product === productByID.id_product);
+
+  if (existingProduct) {
+    const updatedCart = storedCart.map((item) =>
+      item.id_product === productByID.id_product
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    );
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  } else {
+    const updatedCart = [...storedCart, { ...productByID, quantity: 1 }];
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  }
+    alert(`${productByID.name} a été ajouté au panier !`);
+  };
  
   if (!category) return <p>Chargement...</p>;
 
@@ -69,8 +105,8 @@ export default function categoryDetail() {
                         <h3>{product.name}</h3>
                         <p>{product.description}</p>
                         <p>{product.price}</p>
-                        <button>Ajouter au panier</button>
                       </a>
+                      <button onClick={handleAddToCart}>Ajouter au panier</button>
                     </li>
                   ))}
                 </ul>
