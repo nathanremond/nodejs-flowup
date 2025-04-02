@@ -75,7 +75,7 @@ export default function Home() {
             {" "}
             <img src="icone_de_connexion.png" alt="Icône de connexion" />{" "}
           </a>
-          <a href="/" className="text-3xl font-bold underline">
+          <a href="/order" className="text-3xl font-bold underline">
             {" "}
             <img src="icone_de_panier.png" alt="Icône de connexion" />{" "}
           </a>

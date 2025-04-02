@@ -54,7 +54,7 @@ export default function ProductDetail() {
             </nav>
         </header>
         <div>
-            <img src={""} alt={productByID.name} />
+            <img src={`/products/p${productByID.id_product}.png`} alt={productByID.name} />
             <h2>{productByID.name}</h2>
             <p>{productByID.description}</p>
             <p>{productByID.price} €</p>
