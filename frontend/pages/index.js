@@ -2,13 +2,10 @@ import { useEffect, useState, useContext, use } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "../context/AuthContext";
 
-export default function Home() {
-  const { token } = useContext(AuthContext); // Vérifier si l'utilisateur est connecté
-  const router = useRouter();    
+export default function Home() {   
   const [news, setNews] = useState(null);
   const [best_sells, setBest_sells] = useState(null);
   const [category, setCategory] = useState(null);
-  const [product, setProduct] = useState(null);
   
   useEffect(() => {
     fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/bestSells`)
@@ -26,46 +23,13 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/product`)
-      .then((res) => res.json())
-      .then((data) => setProduct(data))
-      .catch((err) => console.error("Erreur :", err));
-  }
-  , []);
-
-  useEffect(() => {
     fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/category`)
       .then((res) => res.json())
       .then((data) => setCategory(data))
       .catch((err) => console.error("Erreur :", err));
   }
   , []);
-  
- 
-  
 
-
-
-
-  // Redirige vers /login si l'utilisateur n'est pas connecté
-  // useEffect(() => {
-  //   if (!token) {
-  //     router.push("/login");
-  //   }
-  // }, [token]);
-
-  // useEffect(() => {
-  //   if (token) {
-  //     fetch(process.env.NEXT_PUBLIC_API_BASE_URL + "/books", {
-  //       headers: { Authorization: `Bearer ${token}` }, // Envoi du token JWT
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => setBooks(data))
-  //       .catch((err) => console.error("Erreur lors du chargement :", err));
-  //   }
-  // }, [token]);
-
-  // if (!token) return <p>Redirection en cours...</p>; // Affiche un message pendant la redirection
 
   return (
     <div>
@@ -81,22 +45,22 @@ export default function Home() {
           </a>
         </div>
         <nav class="menu">
-            <a href="/">Accueil</a>
-            {category && category.map((category) => (
-                <a href={`/category/${category.id_category}`} className="category">
-                    <div key={category.id_category} >
-                        {category.name}
-                    </div>
-                </a>
+          <a href="/">Accueil</a>
+          {category &&
+            category.map((category) => (
+              <a
+                href={`/category/${category.id_category}`}
+                className="category"
+              >
+                <div key={category.id_category}>{category.name}</div>
+              </a>
             ))}
-            <a href="/brand">Collaborations</a>
-            <a href="/request">PC personnalisés</a>   
-
+          <a href="/brand">Collaborations</a>
+          <a href="/request">PC personnalisés</a>
         </nav>
       </header>
       <div>
         <h2>Les meilleures ventes</h2>
-
 
         <div>
           {!best_sells ? (
@@ -106,18 +70,23 @@ export default function Home() {
           ) : (
             best_sells.map((product) => (
               <div key={product.id_product}>
-                <h3>
-                  <a href={`/bestSells`} style={{ marginRight: "10px" }}>
-                    {product.name}
+                <li key={product.id_product}>
+                  <a
+                    href={`/product/${product.id_product}`}
+                    className="product"
+                  >
+                    <img
+                      src={`/products/p${product.id_product}.png`}
+                      alt={product.name}
+                    />
+                    <h3>{product.name}</h3>
+                    <p>{product.description}</p>
+                    <h4>{product.price}</h4>
+                    <button>Ajouter au panier</button>
                   </a>
-                </h3>
-                <p>{product.graphic_card}</p>
-                <p>{product.processor}</p>
-                <p>{product.ram}</p>
-                <p>{product.storage}</p>
-                <h4>{product.price}</h4>
+                </li>
                 <h4>
-                  <a href="/">Ajouter au panier</a>
+                  <a href="/order">Ajouter au panier</a>
                 </h4>
               </div>
             ))
@@ -132,18 +101,23 @@ export default function Home() {
           ) : (
             news.map((product) => (
               <div key={product.id_product}>
-                <h3>
-                  <a href={`/news`} style={{ marginRight: "10px" }}>
-                    {product.name}
+                <li key={product.id_product}>
+                  <a
+                    href={`/product/${product.id_product}`}
+                    className="product"
+                  >
+                    <img
+                      src={`/products/p${product.id_product}.png`}
+                      alt={product.name}
+                    />
+                    <h3>{product.name}</h3>
+                    <p>{product.description}</p>
+                    <h4>{product.price}</h4>
+                    <button>Ajouter au panier</button>
                   </a>
-                </h3>
-                <p>{product.graphic_card}</p>
-                <p>{product.processor}</p>
-                <p>{product.ram}</p>
-                <p>{product.storage}</p>
-                <h4>{product.price}</h4>
+                </li>
                 <h4>
-                  <a href="/">Ajouter au panier</a>
+                  <a href="/order">Ajouter au panier</a>
                 </h4>
               </div>
             ))
@@ -160,57 +134,10 @@ export default function Home() {
             Decouvrez notre site de vente de PC pour gamers, où vous trouverez
             les meilleurs ordinateurs gaming pour améliorer votre expérience de
             jeu. Nous proposons une sélection de PC gaming haut de gamme,
-            équipés des derniers composants.{" "}
+            équipés des derniers composants.
           </h3>
         </div>
       </div>
-      {/* <ul>
-        <li><a href="/bestSells">Meilleures ventes</a></li>
-        <li><a href="/news">Nouveautés</a></li>
-        <li><a href="/request">Créez votre PC</a></li>
-        <li><a href="/bestSells">Meilleures ventes</a></li>
-      </ul> */}
     </div>
-    // <div>
-    //   <h1>Liste des Livres</h1>
-    //   <a href="/add" style={{ display: "block", marginBottom: "20px" }}>
-    //     Ajouter un Livre
-    //   </a>
-    //   <button
-    //     onClick={() => {
-    //       localStorage.removeItem("token"); // Supprime le token
-    //       window.location.reload(); // Recharge la page pour forcer la déconnexion
-    //     }}
-    //   >
-    //     Se Déconnecter
-    //   </button>
-    //   <ul>
-    //     {books.length === 0 ? (
-    //       <p>Aucun livre disponible.</p>
-    //     ) : (
-    //       books.map((book) => (
-    //         <li key={book.id}>
-    //           <a href={`/book/${book.id}`} style={{ marginRight: "10px" }}>
-    //             {book.title} - {book.author} ({book.year})
-    //           </a>
-    //           <button
-    //             onClick={async () => {
-    //               await fetch(
-    //                 process.env.NEXT_PUBLIC_API_BASE_URL + `/books/${book.id}`,
-    //                 {
-    //                   method: "DELETE",
-    //                   headers: { Authorization: `Bearer ${token}` }, // Envoi du token JWT
-    //                 }
-    //               );
-    //               setBooks(books.filter((b) => b.id !== book.id));
-    //             }}
-    //           >
-    //             Supprimer
-    //           </button>
-    //         </li>
-    //       ))
-    //     )}
-    //   </ul>
-    // </div>
   );
 }
