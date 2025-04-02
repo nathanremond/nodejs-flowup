@@ -7,6 +7,8 @@ export default function ProductDetail() {
   const [productByID, setProductByID] = useState(null);
   const [category, setCategory] = useState(null);
   const [performanceByProduct, setPerformanceByProduct] = useState(null);
+  const [photoByProduct, setPhotoByProduct] = useState(null);
+
 
   const handleAddToCart = () => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -37,6 +39,15 @@ export default function ProductDetail() {
       fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/product/${id}/performance`)
         .then((res) => res.json())
         .then((data) => setPerformanceByProduct(data))
+        .catch((err) => console.error("Erreur :", err));
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (id) {
+      fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/product/${id}/photo`)
+        .then((res) => res.json())
+        .then((data) => setPhotoByProduct(data))
         .catch((err) => console.error("Erreur :", err));
     }
   }, [id]);
@@ -76,6 +87,16 @@ export default function ProductDetail() {
           src={`/products/p${productByID.id_product}.png`}
           alt={productByID.name}
         />
+        <div>
+          {photoByProduct &&
+            photoByProduct.map((photo) => (
+              <img
+                key={photo.id_photo}
+                src={`/products/${photo.name}.png`}
+                alt={`Image ${productByID.name}`}
+              ></img>
+            ))}
+        </div>
         <h2>{productByID.name}</h2>
         <p>{productByID.description}</p>
         <p>{productByID.price} €</p>
