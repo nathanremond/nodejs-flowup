@@ -39,45 +39,56 @@ export default function categoryDetail() {
   return (
     <div>
       <header>
-              <div>
-                 <a href="/login" className=""> <img src="icone_de_connexion.png" alt="Icône de connexion"/> </a>
-                <a href="/" className="text-3xl font-bold underline"> <img src="icone_de_panier.png" alt="Icône de connexion"/> </a>
-              </div>
-                <nav class="menu">
-                    <a href="/">Accueil</a>
-                    {category && category.map((category) => (
-                    <a href={`/category/${category.id_category}`} className="category">
-                        <div key={category.id_category} >
-                            {category.name}
-                        </div>
-                    </a>
-                ))}
-                    <a href="/brand">Collaborations</a>
-                    <a href="/request">PC personnalisés</a>   
-                </nav>
-            </header>
-            <div>
-              <h2>{categoryByID ? categoryByID.name : "Aucune catgorie"}</h2>
-            </div>
-            <div>
-              {productByCategory ? (
-                <ul>
-                  {productByCategory.map((product) => (
-                    <li key={product.id_product}>
-                      <a href={`/product/${product.id_product}`} className="product">
-                        <img src={""} alt={product.name} />
-                        <h3>{product.name}</h3>
-                        <p>{product.description}</p>
-                        <p>{product.price}</p>
-                        <button>Ajouter au panier</button>
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>Chargement...</p>
-              )}
-            </div>
+        <div>
+          <a href="/login" className="">
+            {" "}
+            <img src="icone_de_connexion.png" alt="Icône de connexion" />{" "}
+          </a>
+          <a href="/" className="text-3xl font-bold underline">
+            {" "}
+            <img src="icone_de_panier.png" alt="Icône de connexion" />{" "}
+          </a>
+        </div>
+        <nav class="menu">
+          <a href="/">Accueil</a>
+          {category &&
+            category.map((category) => (
+              <a
+                href={`/category/${category.id_category}`}
+                className="category"
+              >
+                <div key={category.id_category}>{category.name}</div>
+              </a>
+            ))}
+          <a href="/brand">Collaborations</a>
+          <a href="/request">PC personnalisés</a>
+        </nav>
+      </header>
+      <div>
+        <h2>{categoryByID ? categoryByID.name : "Aucune catgorie"}</h2>
+      </div>
+      <div>
+        {productByCategory ? (
+          <ul>
+            {productByCategory.map((product) => (
+              <li key={product.id_product}>
+                <a href={`/product/${product.id_product}`} className="product">
+                  <img
+                    src={`/products/p${product.id_product}.png`}
+                    alt={product.name}
+                  />
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <p>{product.price}</p>
+                  <button>Ajouter au panier</button>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Chargement...</p>
+        )}
+      </div>
     </div>
   );
 }

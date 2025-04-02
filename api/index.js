@@ -77,6 +77,9 @@ app.use("/", brandRoutes);
 const performanceRoutes = require("./routes/performanceRoutes");
 app.use("/", performanceRoutes);
 
+const photoRoutes = require("./routes/photoRoutes");
+app.use("/", photoRoutes);
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
