@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useRouter } from "next/router";
+import AuthContext from "../context/AuthContext";
 
 export default function Register() {
   const { token, isLoading } = useContext(AuthContext);
