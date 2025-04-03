@@ -77,7 +77,7 @@ router.get("/user/:id_user/order", async (req, res) => {
  */
 router.post("/order", async (req, res) => {
   try {
-    const result = await OrderModel.create(req.body, req.user.id_user);
+    const result = await OrderModel.create(req.body);
     res.status(201).json(result);
   } catch (error) {
     res.status(500).json({ error: error.message });

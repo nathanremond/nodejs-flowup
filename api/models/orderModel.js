@@ -12,17 +12,17 @@ const pool = new Pool ({
 
 class OrderModel {
   static async getByUser(id_user) {
-    const result = await pool.query(
-      "SELECT * FROM orders WHERE id_user = $1",
-      [id_user]
-    );
+    const result = await pool.query("SELECT * FROM orders WHERE id_user = $1", [
+      id_user,
+    ]);
     return result.rows;
   }
 
-  static async create({ total_amount, ordered_products }, id_user) {
+  static async create({ total_amount, ordered_products, id_user }) {
     const client = await pool.connect();
     try {
       await client.query("BEGIN");
+      console.log("id_user", id_user);
       const order_date = new Date().toISOString().split("T")[0];
       const orderResult = await client.query(
         "INSERT INTO orders (order_date, total_amount, id_user) VALUES ($1, $2, $3) RETURNING *",
