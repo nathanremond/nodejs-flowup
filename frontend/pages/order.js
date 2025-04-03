@@ -107,30 +107,22 @@ export default function ProductDetail() {
   };
 
   return (
-    <div>
+    <div className="container">
       <main>
         <h1>Votre Panier</h1>
         {cart.length > 0 ? (
-          <div>
+          <div className="cart-container">
             <ul>
               {cart.map((product) => (
                 <li key={product.id_product}>
                   <h3>{product.name}</h3>
                   <p>Prix : {(Number(product.price) || 0).toFixed(2)} €</p>
                   <p>Quantité : {product.quantity}</p>
-                  <button
-                    onClick={() => handleIncreaseQuantity(product.id_product)}
-                  >
-                    +
-                  </button>
-                  <button
-                    onClick={() => handleDecreaseQuantity(product.id_product)}
-                  >
-                    -
-                  </button>
-                  <button
-                    onClick={() => handleRemoveFromCart(product.id_product)}
-                  >
+                  <div className="quantity-buttons">
+                    <button onClick={() => handleIncreaseQuantity(product.id_product)}>+</button>
+                    <button onClick={() => handleDecreaseQuantity(product.id_product)}>-</button>
+                  </div>
+                  <button onClick={() => handleRemoveFromCart(product.id_product)}>
                     Supprimer
                   </button>
                 </li>
