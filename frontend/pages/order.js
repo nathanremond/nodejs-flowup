@@ -60,8 +60,6 @@ export default function ProductDetail() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Utilisateur actuel :", id_user);
-
     if (!id_user) {
       alert("Veuillez vous connecter avant de passer commande.");
       return;
@@ -79,8 +77,6 @@ export default function ProductDetail() {
       id_user: id_user,
     };
 
-    console.log("Données envoyées :", data);
-
     try {
       const response = await fetch(
         process.env.NEXT_PUBLIC_API_BASE_URL + "/order",
@@ -93,7 +89,6 @@ export default function ProductDetail() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        console.error("Erreur lors de la commande :", errorData);
         alert(`Erreur : ${errorData.message || "Une erreur est survenue"}`);
         return;
       }
@@ -101,7 +96,6 @@ export default function ProductDetail() {
       alert("Votre commande a été passée avec succès !");
       await router.push("/profile");
     } catch (error) {
-      console.error("Erreur réseau lors de la commande :", error);
       alert("Une erreur est survenue lors de la commande.");
     }
   };

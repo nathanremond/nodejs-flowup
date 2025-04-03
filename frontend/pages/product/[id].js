@@ -82,11 +82,11 @@ export default function ProductDetail() {
         </div>
         <h2>{productByID.name}</h2>
         <p>{productByID.description}</p>
-        <p>{productByID.price} €</p>
-        <p>{productByID.graphic_card}</p>
-        <p>{productByID.processor}</p>
-        <p>{productByID.ram}</p>
-        <p>{productByID.storage}</p>
+        <p>Prix: {productByID.price} €</p>
+        <p>Carte graphique: {productByID.graphic_card}</p>
+        <p>Processeur: {productByID.processor}</p>
+        <p>RAM: {productByID.ram}</p>
+        <p>Stockage: {productByID.storage}</p>
         <button onClick={handleAddToCart}>Ajouter au panier</button>
       </div>
 
@@ -99,9 +99,9 @@ export default function ProductDetail() {
                 src={`/games/${performance.picture_url}`}
                 alt={`Image Jeu ${performance.name}`}
               ></img>
-              <p>{performance.average_resolution_low}</p>
+              <p>{performance.average_resolution_low}:</p>
               <p>{performance.fps_low} fps</p>
-              <p>{performance.average_resolution_high}</p>
+              <p>{performance.average_resolution_high}:</p>
               <p>{performance.fps_high} fps</p>
             </div>
           ))}

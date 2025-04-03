@@ -73,7 +73,7 @@ export default function BookDetail() {
                   />
                   <h3>{product.name}</h3>
                   <p>{product.description}</p>
-                  <h4>{product.price}</h4>
+                  <h4>{product.price} €</h4>
                 </a>
               </li>
             ))}
@@ -96,7 +96,7 @@ export default function BookDetail() {
                   />
                   <h3>{product.name}</h3>
                   <p>{product.description}</p>
-                  <h4>{product.price}</h4>
+                  <h4>{product.price} €</h4>
                 </a>
               </li>
             ))}
@@ -119,7 +119,7 @@ export default function BookDetail() {
                   />
                   <h3>{product.name}</h3>
                   <p>{product.description}</p>
-                  <h4>{product.price}</h4>
+                  <h4>{product.price} €</h4>
                 </a>
               </li>
             ))}
