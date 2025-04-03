@@ -100,11 +100,11 @@ export default function ProductDetail() {
         <h2>{productByID.name}</h2>
         <p>{productByID.description}</p>
         <p>{productByID.price} €</p>
-        <button onClick={handleAddToCart}>Ajouter au panier</button>
         <p>{productByID.graphic_card}</p>
         <p>{productByID.processor}</p>
         <p>{productByID.ram}</p>
         <p>{productByID.storage}</p>
+        <button onClick={handleAddToCart}>Ajouter au panier</button>
       </div>
 
       <div>
