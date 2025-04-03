@@ -29,14 +29,6 @@ export default function categoryDetail() {
   }, [id]);
 
   useEffect(() => {
-    fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/category`)
-      .then((res) => res.json())
-      .then((data) => setCategory(data))
-      .catch((err) => console.error("Erreur :", err));
-  }
-  , []);
-
-  useEffect(() => {
     if (id) {
       fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/product/${id}`)
         .then((res) => res.json())
@@ -70,50 +62,32 @@ export default function categoryDetail() {
     alert(`${productByID.name} a été ajouté au panier !`);
   };
  
-  if (!category) return <p>Chargement...</p>;
+  if (!categoryByID) return <p>Chargement...</p>;
 
   return (
     <div>
-      <header>
-              <div>
-                 <a href="/login" className=""> <img src="icone_de_connexion.png" alt="Icône de connexion"/> </a>
-                <a href="/" className="text-3xl font-bold underline"> <img src="icone_de_panier.png" alt="Icône de connexion"/> </a>
-              </div>
-                <nav class="menu">
-                    <a href="/">Accueil</a>
-                    {category && category.map((category) => (
-                    <a href={`/category/${category.id_category}`} className="category">
-                        <div key={category.id_category} >
-                            {category.name}
-                        </div>
-                    </a>
-                ))}
-                    <a href="/brand">Collaborations</a>
-                    <a href="/request">PC personnalisés</a>   
-                </nav>
-            </header>
-            <div>
-              <h2>{categoryByID ? categoryByID.name : "Aucune catgorie"}</h2>
-            </div>
-            <div>
-              {productByCategory ? (
-                <ul>
-                  {productByCategory.map((product) => (
-                    <li key={product.id_product}>
-                      <a href={`/product/${product.id_product}`} className="product">
-                        <img src={""} alt={product.name} />
-                        <h3>{product.name}</h3>
-                        <p>{product.description}</p>
-                        <p>{product.price}</p>
-                      </a>
-                      <button onClick={handleAddToCart}>Ajouter au panier</button>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>Chargement...</p>
-              )}
-            </div>
+      <div>
+        <h2>{categoryByID ? categoryByID.name : "Aucune catégorie"}</h2>
+      </div>
+      <div>
+        {productByCategory ? (
+          <ul>
+            {productByCategory.map((product) => (
+              <li key={product.id_product}>
+                <a href={`/product/${product.id_product}`} className="product">
+                  <img src={""} alt={product.name} />
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <p>{product.price}</p>
+                </a>
+                <button onClick={handleAddToCart}>Ajouter au panier</button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Chargement...</p>
+        )}
+      </div>
     </div>
   );
 }
