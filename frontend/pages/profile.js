@@ -60,7 +60,7 @@ export default function profile() {
               <p>{request.city}</p>
               <p>{request.zipcode}</p>
               <p>{request.country}</p>
-              <p>{request.buy_date}</p>
+              <p>{formatDate(request.buy_date)}</p>
               <p>{request.use}</p>
               <p>{request.budget}</p>
               <p>{request.message}</p>
