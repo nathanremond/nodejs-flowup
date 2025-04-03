@@ -6,6 +6,10 @@ export default function ProductDetail() {
   const { id } = router.query;
   const [category, setCategory] = useState(null);
   const [cart, setCart] = useState([]);
+  const [total_amount, setTotal_amount] = useState(0);
+  const [ordered_products, setOrdered_products] = useState([]);
+  const [user, setUser] = useState(null);
+
 
   useEffect(() => {
     fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/category`)
@@ -18,6 +22,13 @@ export default function ProductDetail() {
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCart(storedCart);
+  }, []);
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser) {
+      setUser(storedUser);
+    }
   }, []);
 
   const handleRemoveFromCart = (productId) => {
@@ -53,6 +64,56 @@ export default function ProductDetail() {
     return Number(total).toFixed(2);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    console.log("Utilisateur actuel :", user);
+  
+    if (!user || !user.id_user) {
+      alert("Veuillez vous connecter avant de passer commande.");
+      return;
+    }
+  
+    const total_amount = calculTotal();
+    const ordered_products = cart.map((product) => ({
+      product_id: product.id_product,
+      quantity: product.quantity,
+    }));
+  
+    const data = {
+      user_id: user.id_user,
+      total: total_amount,
+      products: ordered_products,
+    };
+  
+    console.log("Données envoyées :", data);
+  
+    try {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_API_BASE_URL + "/order",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Erreur lors de la commande :", errorData);
+        alert(`Erreur : ${errorData.message || "Une erreur est survenue"}`);
+        return;
+      }
+  
+      alert("Votre commande a été passée avec succès !");
+      await router.push("/profile");
+    } catch (error) {
+      console.error("Erreur réseau lors de la commande :", error);
+      alert("Une erreur est survenue lors de la commande.");
+    }
+  };
+  
+  
   return (
     <div>
       <header>
@@ -92,7 +153,7 @@ export default function ProductDetail() {
               ))}
             </ul>
             <h2>Total : {calculTotal()} €</h2>
-            <button>Payer</button>
+            <button onClick={handleSubmit}>Payer</button>
           </div>
         ) : (
           <p>Votre panier est vide.</p>
