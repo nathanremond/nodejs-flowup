@@ -65,7 +65,17 @@ export default function BookDetail() {
         {PCgaming ? (
           <ul>
             {PCgaming.map((product) => (
-              <li key={product.id_product}>{product.name}</li>
+              <li key={product.id_product}>
+                <a href={`/product/${product.id_product}`} className="product">
+                  <img
+                    src={`/products/p${product.id_product}.png`}
+                    alt={product.name}
+                  />
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <h4>{product.price}</h4>
+                </a>
+              </li>
             ))}
           </ul>
         ) : (
@@ -78,7 +88,17 @@ export default function BookDetail() {
         {Laptops ? (
           <ul>
             {Laptops.map((product) => (
-              <li key={product.id_product}>{product.name}</li>
+              <li key={product.id_product}>
+                <a href={`/product/${product.id_product}`} className="product">
+                  <img
+                    src={`/products/p${product.id_product}.png`}
+                    alt={product.name}
+                  />
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <h4>{product.price}</h4>
+                </a>
+              </li>
             ))}
           </ul>
         ) : (
@@ -91,7 +111,17 @@ export default function BookDetail() {
         {Peripherals ? (
           <ul>
             {Peripherals.map((product) => (
-              <li key={product.id_product}>{product.name}</li>
+              <li key={product.id_product}>
+                <a href={`/product/${product.id_product}`} className="product">
+                  <img
+                    src={`/products/p${product.id_product}.png`}
+                    alt={product.name}
+                  />
+                  <h3>{product.name}</h3>
+                  <p>{product.description}</p>
+                  <h4>{product.price}</h4>
+                </a>
+              </li>
             ))}
           </ul>
         ) : (
