@@ -2,11 +2,18 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 export default function Register() {
+  const { token, isLoading } = useContext(AuthContext);
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+
+  //Redirige vers /profile si l'utilisateur est déjà connecté
+  if (isLoading) return <p>Chargement...</p>;
+  if (token) {
+    router.push("/profile");
+  }
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -15,7 +22,7 @@ export default function Register() {
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ firstname, lastname, email, password}),
+        body: JSON.stringify({ firstname, lastname, email, password }),
       }
     );
 
