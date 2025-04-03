@@ -22,7 +22,6 @@ class OrderModel {
     const client = await pool.connect();
     try {
       await client.query("BEGIN");
-      console.log("id_user", id_user);
       const order_date = new Date().toISOString().split("T")[0];
       const orderResult = await client.query(
         "INSERT INTO orders (order_date, total_amount, id_user) VALUES ($1, $2, $3) RETURNING *",

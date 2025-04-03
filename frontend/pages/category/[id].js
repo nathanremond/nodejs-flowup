@@ -78,7 +78,7 @@ export default function categoryDetail() {
                         <img src={`/products/p${product.id_product}.png`} alt={product.name} />
                         <h3>{product.name}</h3>
                         <p>{product.description}</p>
-                        <p>{product.price}</p>
+                        <p>{product.price} €</p>
                       </a>
                       <button onClick={handleAddToCart}>Ajouter au panier</button>
                     </li>

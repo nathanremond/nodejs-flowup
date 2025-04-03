@@ -64,6 +64,8 @@ router.get("/user/:id_user/order", async (req, res) => {
  *                    type: number
  *                  quantity:
  *                    type: number
+ *           id_user:
+ *            type: number
  *     responses:
  *       200:
  *         description: Successful response
