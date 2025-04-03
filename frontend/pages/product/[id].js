@@ -5,7 +5,6 @@ export default function ProductDetail() {
   const router = useRouter();
   const { id } = router.query;
   const [productByID, setProductByID] = useState(null);
-  const [category, setCategory] = useState(null);
   const [cart, setCart] = useState([]);
   const [performanceByProduct, setPerformanceByProduct] = useState(null);
   const [photoByProduct, setPhotoByProduct] = useState(null);
@@ -45,14 +44,6 @@ export default function ProductDetail() {
   }, [id]);
 
   useEffect(() => {
-    fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/category`)
-      .then((res) => res.json())
-      .then((data) => setCategory(data))
-      .catch((err) => console.error("Erreur :", err));
-  }
-  , []);
-
-  useEffect(() => {
     if(id) {
       fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/product/${id}/performance`)
         .then((res) => res.json())
@@ -74,32 +65,6 @@ export default function ProductDetail() {
 
   return (
     <div>
-      <header>
-        <div>
-          <a href="/login" className="">
-            {" "}
-            <img src="icone_de_connexion.png" alt="Icône de connexion" />{" "}
-          </a>
-          <a href="/order" className="text-3xl font-bold underline">
-            {" "}
-            <img src="icone_de_panier.png" alt="Icône de panier" />{" "}
-          </a>
-        </div>
-        <nav class="menu">
-          <a href="/">Accueil</a>
-          {category &&
-            category.map((category) => (
-              <a
-                href={`/category/${category.id_category}`}
-                className="category"
-              >
-                <div key={category.id_category}>{category.name}</div>
-              </a>
-            ))}
-          <a href="/brand">Collaborations</a>
-          <a href="/request">PC personnalisés</a>
-        </nav>
-      </header>
       <div>
         <img
           src={`/products/p${productByID.id_product}.png`}
