@@ -51,71 +51,73 @@ export default function Request() {
   };
 
   return (
-    <form onSubmit={handleRequest}>
-      <h1>Commande personnalisée</h1>
-      <br />
-      <br />
-      <input
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Phone"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Street"
-        value={street}
-        onChange={(e) => setStreet(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="City"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Zipcode"
-        value={zipcode}
-        onChange={(e) => setZipcode(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Country"
-        value={country}
-        onChange={(e) => setCountry(e.target.value)}
-      />
-      <input
-        type="date"
-        placeholder="Date d'achat"
-        value={buy_date}
-        onChange={(e) => setBuy_date(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Utilisation"
-        value={use}
-        onChange={(e) => setUse(e.target.value)}
-      />
-      <input
-        type="number"
-        placeholder="Budget"
-        value={budget}
-        onChange={(e) => setBudget(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Message"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-      />
-      <button type="submit">Envoyer</button>
-    </form>
+    <div className="container">
+      <form onSubmit={handleRequest}>
+        <h1>Commande personnalisée</h1>
+        <br />
+        <br />
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Phone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Street"
+          value={street}
+          onChange={(e) => setStreet(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="City"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Zipcode"
+          value={zipcode}
+          onChange={(e) => setZipcode(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Country"
+          value={country}
+          onChange={(e) => setCountry(e.target.value)}
+        />
+        <input
+          type="date"
+          placeholder="Date d'achat"
+          value={buy_date}
+          onChange={(e) => setBuy_date(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Utilisation"
+          value={use}
+          onChange={(e) => setUse(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Budget"
+          value={budget}
+          onChange={(e) => setBudget(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Message"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        <button type="submit">Envoyer</button>
+      </form>
+    </div>
   );
 }
