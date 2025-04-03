@@ -1,6 +1,4 @@
 import { useEffect, useState, useContext, use } from "react";
-import { useRouter } from "next/router";
-import AuthContext from "../context/AuthContext";
 
 export default function Home() {   
   const [news, setNews] = useState(null);
@@ -41,7 +39,7 @@ export default function Home() {
           </a>
           <a href="/order" className="text-3xl font-bold underline">
             {" "}
-            <img src="icone_de_panier.png" alt="Icône de connexion" />{" "}
+            <img src="icone_de_panier.png" alt="Icône de panier" />{" "}
           </a>
         </div>
         <nav class="menu">
@@ -82,12 +80,8 @@ export default function Home() {
                     <h3>{product.name}</h3>
                     <p>{product.description}</p>
                     <h4>{product.price}</h4>
-                    <button>Ajouter au panier</button>
                   </a>
                 </li>
-                <h4>
-                  <a href="/order">Ajouter au panier</a>
-                </h4>
               </div>
             ))
           )}
@@ -113,12 +107,8 @@ export default function Home() {
                     <h3>{product.name}</h3>
                     <p>{product.description}</p>
                     <h4>{product.price}</h4>
-                    <button>Ajouter au panier</button>
                   </a>
                 </li>
-                <h4>
-                  <a href="/order">Ajouter au panier</a>
-                </h4>
               </div>
             ))
           )}
