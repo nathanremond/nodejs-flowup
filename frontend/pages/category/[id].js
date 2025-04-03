@@ -65,29 +65,30 @@ export default function categoryDetail() {
   if (!categoryByID) return <p>Chargement...</p>;
 
   return (
-    <div>
-      <div>
-        <h2>{categoryByID ? categoryByID.name : "Aucune catégorie"}</h2>
-      </div>
-      <div>
-        {productByCategory ? (
-          <ul>
-            {productByCategory.map((product) => (
-              <li key={product.id_product}>
-                <a href={`/product/${product.id_product}`} className="product">
-                  <img src={""} alt={product.name} />
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <p>{product.price}</p>
-                </a>
-                <button onClick={handleAddToCart}>Ajouter au panier</button>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Chargement...</p>
-        )}
-      </div>
+    <div className="container">
+            <div className="category-detail">
+              <h2>{categoryByID ? categoryByID.name : "Aucune catgorie"}</h2>
+            </div>
+            <div className="category-product-list">
+              {productByCategory ? (
+                <ul>
+                  {productByCategory.map((product) => (
+                    <li key={product.id_product}>
+                      <a href={`/product/${product.id_product}`} className="product">
+                        <img src={`/products/p${product.id_product}.png`} alt={product.name} />
+                        <h3>{product.name}</h3>
+                        <p>{product.description}</p>
+                        <p>{product.price}</p>
+                      </a>
+                      <button onClick={handleAddToCart}>Ajouter au panier</button>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>Chargement...</p>
+              )}
+            </div>
+
     </div>
   );
 }

@@ -33,24 +33,26 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <h1>Connexion</h1>
-      <a href="/register">Créer un compte</a>
-      <br />
-      <br />
-      <input
-        type="text"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Mot de passe"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">Se connecter</button>
-    </form>
+    <div className="container">
+      <form onSubmit={handleLogin}>
+        <h1>Connexion</h1>
+        <a href="/register">Créer un compte</a>
+        <br />
+        <br />
+        <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">Se connecter</button>
+      </form>
+    </div>  
   );
 }

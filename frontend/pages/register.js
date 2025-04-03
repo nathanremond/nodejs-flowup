@@ -30,34 +30,36 @@ export default function Register() {
   };
 
   return (
-    <form onSubmit={handleRegister}>
-      <h1>Créer un compte</h1>
-      <a href="/login">Se connecter à un compte</a>
-      <input
-        type="text"
-        placeholder="Prénom"
-        value={firstname}
-        onChange={(e) => setFirstname(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Nom"
-        value={lastname}
-        onChange={(e) => setLastname(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Mot de passe"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">S'inscrire</button>
-    </form>
+    <div className="container">
+      <form onSubmit={handleRegister}>
+        <h1>Créer un compte</h1>
+        <a href="/login">Se connecter à un compte</a>
+        <input
+          type="text"
+          placeholder="Prénom"
+          value={firstname}
+          onChange={(e) => setFirstname(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Nom"
+          value={lastname}
+          onChange={(e) => setLastname(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button type="submit">S'inscrire</button>
+      </form>
+    </div>
   );
 }
