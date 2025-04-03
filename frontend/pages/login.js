@@ -3,10 +3,16 @@ import { useRouter } from "next/router";
 import AuthContext from "../context/AuthContext";
 
 export default function Login() {
-  const { login } = useContext(AuthContext);
+  const { login, token, isLoading } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
+  
+  //Redirige vers /profile si l'utilisateur est déjà connecté
+  if (isLoading) return <p>Chargement...</p>;
+  if (token) {
+    router.push("/profile");
+  }
 
   const handleLogin = async (e) => {
     e.preventDefault();
