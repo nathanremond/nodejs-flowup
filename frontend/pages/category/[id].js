@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 export default function categoryDetail() {
   const router = useRouter();
   const { id } = router.query;
-  const [category, setCategory] = useState(null);
   const [categoryByID, setCategoryByID] = useState(null);
   const [productByCategory, setProductByCategory] = useState(null);
   const [productByID, setProductByID] = useState(null);
@@ -42,24 +41,24 @@ export default function categoryDetail() {
     setCart(storedCart);
   }, []);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (product) => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const existingProduct = storedCart.find((item) => item.id_product === productByID.id_product);
+    const existingProduct = storedCart.find((item) => item.id_product === product.id_product);
 
   if (existingProduct) {
     const updatedCart = storedCart.map((item) =>
-      item.id_product === productByID.id_product
+      item.id_product === product.id_product
         ? { ...item, quantity: item.quantity + 1 }
         : item
     );
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   } else {
-    const updatedCart = [...storedCart, { ...productByID, quantity: 1 }];
+    const updatedCart = [...storedCart, { ...product, quantity: 1 }];
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   }
-    alert(`${productByID.name} a été ajouté au panier !`);
+    alert(`${product.name} a été ajouté au panier !`);
   };
  
   if (!categoryByID) return <p>Chargement...</p>;
@@ -80,7 +79,7 @@ export default function categoryDetail() {
                         <p>{product.description}</p>
                         <p>{product.price} €</p>
                       </a>
-                      <button onClick={handleAddToCart}>Ajouter au panier</button>
+                      <button onClick={() => handleAddToCart(product)}>Ajouter au panier</button>
                     </li>
                   ))}
                 </ul>
