@@ -6,11 +6,30 @@ export default function ProductDetail() {
   const { id } = router.query;
   const [productByID, setProductByID] = useState(null);
   const [category, setCategory] = useState(null);
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+      const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+      setCart(storedCart);
+    }, []);
 
   const handleAddToCart = () => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const updatedCart = [...storedCart, productByID];
+    const existingProduct = storedCart.find((item) => item.id_product === productByID.id_product);
+
+  if (existingProduct) {
+    const updatedCart = storedCart.map((item) =>
+      item.id_product === productByID.id_product
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    );
+    setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+  } else {
+    const updatedCart = [...storedCart, { ...productByID, quantity: 1 }];
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  }
     alert(`${productByID.name} a été ajouté au panier !`);
   };
 
