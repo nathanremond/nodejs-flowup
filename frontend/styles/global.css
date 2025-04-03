@@ -462,3 +462,83 @@ button:hover {
   background-color: orangered;
 }
 
+.cart-container {
+  margin-top: 20px;
+}
+
+.cart-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cart-container li {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-container li h3 {
+  font-size: 1.2rem;
+  color: dimgray;
+}
+
+.cart-container li p {
+  font-size: 1rem;
+  color: dimgray;
+  margin: 0;
+}
+
+.cart-container button {
+  padding: 10px;
+  margin: 10px;
+  font-size: 1rem;
+  color: #ffffff;
+  background-color: orange;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cart-container button:hover {
+  background-color: orangered;
+}
+
+.cart-container .quantity-buttons {
+  display: flex;
+  gap: 5px; 
+  margin-top: 10px; 
+}
+
+.cart-container .quantity-buttons button {
+  padding: 5px 10px;
+  font-size: 0.8rem; 
+  color: #ffffff;
+  background-color: orange;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.cart-container .quantity-buttons button:hover {
+  background-color: orangered;
+}
+
+
+.cart-container h2 {
+  font-size: 1.5rem;
+  color: #333333;
+  text-align: right;
+  margin-top: 20px;
+}
+
+
+
+
