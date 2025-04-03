@@ -73,7 +73,7 @@ export default function ProductDetail() {
   if (!productByID) return <p>Chargement...</p>;
 
   return (
-    <div>
+    <div className="container">
       <header>
         <div>
           <a href="/login" className="">
@@ -100,12 +100,12 @@ export default function ProductDetail() {
           <a href="/request">PC personnalisés</a>
         </nav>
       </header>
-      <div>
+      <div className="detail-product">
         <img
           src={`/products/p${productByID.id_product}.png`}
           alt={productByID.name}
         />
-        <div>
+        <div className="detail-product-infos">
           {photoByProduct &&
             photoByProduct.map((photo) => (
               <img
@@ -125,7 +125,7 @@ export default function ProductDetail() {
         <button onClick={handleAddToCart}>Ajouter au panier</button>
       </div>
 
-      <div>
+      <div className="detail-product-performance">
         <h2>Performances</h2>
         {performanceByProduct &&
           performanceByProduct.map((performance) => (

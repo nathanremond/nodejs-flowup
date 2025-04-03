@@ -44,12 +44,12 @@ export default function profile() {
   if (!token) return <p>Redirection en cours...</p>; // Affiche un message pendant la redirection
 
   return (
-    <div>
-      <div>
+    <div className="container">
+      <div className="profile-name">
         <h1>Bonjour {email}</h1>
       </div>
 
-      <div>
+      <div className="profile-container">
         <h1>Mes commandes personnalisées</h1>
         {requestsByUser && requestsByUser.length > 0 ? (
           requestsByUser.map((request) => (
@@ -71,7 +71,7 @@ export default function profile() {
         )}
       </div>
 
-      <div>
+      <div className="profile-container">
         <h1>Mes commandes</h1>
         {ordersByUser && ordersByUser.length > 0 ? (
           ordersByUser.map((order) => (

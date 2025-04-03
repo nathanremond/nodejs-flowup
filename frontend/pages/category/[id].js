@@ -73,7 +73,7 @@ export default function categoryDetail() {
   if (!category) return <p>Chargement...</p>;
 
   return (
-    <div>
+    <div className="container">
       <header>
               <div>
                  <a href="/login" className=""> <img src="icone_de_connexion.png" alt="Icône de connexion"/> </a>
@@ -92,16 +92,16 @@ export default function categoryDetail() {
                     <a href="/request">PC personnalisés</a>   
                 </nav>
             </header>
-            <div>
+            <div className="category-detail">
               <h2>{categoryByID ? categoryByID.name : "Aucune catgorie"}</h2>
             </div>
-            <div>
+            <div className="category-product-list">
               {productByCategory ? (
                 <ul>
                   {productByCategory.map((product) => (
                     <li key={product.id_product}>
                       <a href={`/product/${product.id_product}`} className="product">
-                        <img src={""} alt={product.name} />
+                        <img src={`/products/p${product.id_product}.png`} alt={product.name} />
                         <h3>{product.name}</h3>
                         <p>{product.description}</p>
                         <p>{product.price}</p>
