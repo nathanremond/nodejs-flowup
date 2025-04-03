@@ -54,16 +54,16 @@ export default function BookDetail() {
   if (!brand) return <p>Chargement...</p>;
 
   return (
-    <div>
-      <div>
+    <div className="container">
+      <div className="brand-info">
         <h1>{brand.name}</h1>
         <p>{brand.description}</p>
       </div>
 
-      <div>
+      <div className="product-section">
         <h2>PC Gaming</h2>
         {PCgaming ? (
-          <ul>
+          <ul className="product-list">
             {PCgaming.map((product) => (
               <li key={product.id_product}>
                 <a href={`/product/${product.id_product}`} className="product">
@@ -83,10 +83,10 @@ export default function BookDetail() {
         )}
       </div>
 
-      <div>
+      <div className="product-section">
         <h2>PC Portables</h2>
         {Laptops ? (
-          <ul>
+          <ul className="product-list">
             {Laptops.map((product) => (
               <li key={product.id_product}>
                 <a href={`/product/${product.id_product}`} className="product">
@@ -106,17 +106,19 @@ export default function BookDetail() {
         )}
       </div>
 
-      <div>
+      <div className="product-section">
         <h2>Périphériques</h2>
         {Peripherals ? (
-          <ul>
+          <ul className="product-list">
             {Peripherals.map((product) => (
               <li key={product.id_product}>
                 <a href={`/product/${product.id_product}`} className="product">
-                  <img
-                    src={`/products/p${product.id_product}.png`}
-                    alt={product.name}
-                  />
+                  <div className="product-imageP">
+                    <img
+                      src={`/products/p${product.id_product}.png`}
+                      alt={product.name}
+                    />
+                  </div>
                   <h3>{product.name}</h3>
                   <p>{product.description}</p>
                   <h4>{product.price} €</h4>
