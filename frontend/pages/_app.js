@@ -1,4 +1,5 @@
 import { AuthProvider } from "../context/AuthContext";
+import "../styles/global.css";
 
 import "../styles/global.css";
 
