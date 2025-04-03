@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Header() {
-
   const [category, setCategory] = useState(null);
+  const router = useRouter();
 
   useEffect(() => {
     fetch(process.env.NEXT_PUBLIC_API_BASE_URL + `/category`)
@@ -11,17 +12,24 @@ export default function Header() {
       .catch((err) => console.error("Erreur :", err));
   }, []);
 
+  const isIdRoute = router.pathname.includes("[id]");
 
   return (
     <header>
       <div>
         <a href="/login" className="">
           {" "}
-          <img src="icone_de_connexion.png" alt="Icône de connexion" />{" "}
+          <img
+            src={`${isIdRoute ? "../" : ""}icone_de_connexion.png`}
+            alt="Icône de connexion"
+          />{" "}
         </a>
         <a href="/order" className="text-3xl font-bold underline">
           {" "}
-          <img src="icone_de_panier.png" alt="Icône de panier" />{" "}
+          <img
+            src={`${isIdRoute ? "../" : ""}icone_de_panier.png`}
+            alt="Icône de panier"
+          />{" "}
         </a>
       </div>
       <nav class="menu">
